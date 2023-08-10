@@ -1,0 +1,165 @@
+﻿@model Unicorn.Models.NV
+
+@{
+    ViewData["Title"] = "Thêm nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}<
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Người dùng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index">Nhân viên</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin thêm mới nhân viên</h3>
+        </div>
+        <form asp-action="Add" asp-controller="Nhanvien" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body row">
+                <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                    <div class="form-group">
+                        <label class="comtrol-label">Preview Image</label>
+                        <br />
+                        <img decoding="async" src="/Image/No_Image.png" asp-append-version="true" class="hidden" id="preview" />
+                        <br />
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ID_NV" class="control-label"> Mã Nhân viên:</label>
+                                <input asp-for="ID_NV" class="form-control" />
+                                <span asp-validation-for="ID_NV" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"> Tên nhân viên:</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ID_To" class="control-label"> Tổ:</label>
+                                <select asp-for="ID_To" class="form-control" asp-items="ViewBag.ID_ToList"></select>
+                                <span asp-validation-for="ID_To" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ID_Chucvu" class="control-label"> Chức vụ:</label>
+                                <select asp-for="ID_Chucvu" class="form-control" asp-items="ViewBag.ID_CVList"></select>
+                                <span asp-validation-for="ID_Chucvu" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Nam_sinh" class="control-label">Năm sinh:</label>
+                                <input asp-for="Nam_sinh" type="date" asp-format="dd/mm/yyyy" class="form-control" />
+                                <span asp-validation-for="Nam_sinh" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Gioi_tinh" class="control-label">Giới tính:</label>
+                                <select asp-for="Gioi_tinh" class="form-control">
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                    <span asp-validation-for="Gioi_tinh" class="text-danger"></span>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="SDT" class="control-label">Số điện thoại:</label>
+                                <input asp-for="SDT" class="form-control" />
+                                <span asp-validation-for="SDT" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="CMT" class="control-label">Chứng minh thư:</label>
+                                <input asp-for="CMT" class="form-control" />
+                                <span asp-validation-for="CMT" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Ngay_vao" class="control-label">Ngày vào:</label>
+                                <br />
+                                <input asp-for="Ngay_vao" type="date" asp-format="dd/mm/yyyy" class="form-control" />
+                                <span asp-validation-for="Ngay_vao" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ImageFile" class="control-label"></label>
+                                <input asp-for="ImageFile" accept="image/*" id="FileImage" />
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Que_quan" class="control-label">Quê quán</label>
+                        <input asp-for="Que_quan" class="form-control" />
+                        <span asp-validation-for="Que_quan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-primary">Trở lại</a>
+                        <input type="submit" value="Lưu" class="btn btn-success" />
+                    </div>
+                </div>  
+            </div>
+
+        </form>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        FileImage.onchange = evt => {
+
+            const [file] = FileImage.files
+
+            if (file) {
+
+                preview.src = URL.createObjectURL(file);
+
+                $("#preview").removeClass("hidden");
+            }
+        }
+    </script>
+
+}

@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Unicorn.Models.NV>
+
+@{
+    ViewBag.Title = "Danh sách nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Nhân viên</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active">Nhân viên</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<div id="Nhanvien"></div>
+
+
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách Nhân viên</h3>
+            <div class="card-tools">
+                <a asp-action="Add" class="btn btn-success fa fa-plus">Thêm mới</a>
+            </div>
+        </div>
+        <br />
+        <div class="card card-solid">
+            <div class="card-body pb-0">
+                <div class="row">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+                                        Danh sách Nhân viên
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><b>@item.Name</b></h2>
+                                                <p class="text-muted text-sm"><b>Giới tính: </b>@item.Gioi_tinh</p>
+                                                <p class="text-muted text-sm"><b>Năm sinh: </b>@item.Nam_sinh.ToShortDateString()</p>
+                                                <p class="text-muted text-sm"><b>Chức vụ: </b>@item.ID_Chucvu</p>
+                                                <p class="text-muted text-sm"><b>Tổ: </b>@item.ID_To</p>
+                                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Địa chỉ: @item.Que_quan</li>
+                                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Số điện thoại: @item.SDT</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-5 text-center">
+                                                <img src="@item.Image" alt="user-avatar" class="img-circle img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-right">
+                                            <a href="#" data-id="@item.ID_NV" class="btn btn-sm btn-danger btnDelete">
+                                                <i class="fa fa-trash"></i> Xóa
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.ID_NV" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-user-edit"></i> Edit
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h2>Không có dữ liệu</h2>
+                    }
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer"></div>
+            <!-- /.card-footer-->
+        </div>
+    </div>
+        <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<!-- Content Header (Page header) -->
+
+
+@*Scrip*@
+
+<script>
+    //Delete
+    $(document).ready(function () {
+        $('body').on('click', '.btnDelete', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Bạn có muốn xóa nhân viên này khỏi danh sách không??');
+            if (conf === true) {
+                $.ajax({
+                    url: '/Nhanvien/delete',
+                    type: 'Post',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#trow_' + id).remove();
+                            window.location.href = "/Nhanvien/index";
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>
+
+
+
