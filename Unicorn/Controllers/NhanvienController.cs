@@ -170,5 +170,7 @@ namespace Unicorn.Controllers
         {
             return _DBContext.NV.Any(e => e.ID_NV == id);
         }
+
+        
     }
 }

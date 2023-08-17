@@ -25,26 +25,8 @@ namespace Unicorn.Controllers
               return View(await _context.To.ToListAsync());
         }
 
-        // GET: To/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.To == null)
-            {
-                return NotFound();
-            }
-
-            var to = await _context.To
-                .FirstOrDefaultAsync(m => m.ID_To == id);
-            if (to == null)
-            {
-                return NotFound();
-            }
-
-            return View(to);
-        }
-
         // GET: To/Create
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -54,7 +36,7 @@ namespace Unicorn.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_To,Name,Ghi_chu")] To to)
+        public async Task<IActionResult> Add([Bind("ID_To,Name,Ghi_chu")] To to)
         {
             if (ModelState.IsValid)
             {
@@ -116,41 +98,18 @@ namespace Unicorn.Controllers
             return View(to);
         }
 
-        // GET: To/Delete/5
-        public async Task<IActionResult> Delete(string id)
+
+        [HttpPost]
+        public ActionResult Delete(string id)
         {
-            if (id == null || _context.To == null)
+            var item = _context.To.Find(id);
+            if (item != null)
             {
-                return NotFound();
+                _context.To.Remove(item);
+                _context.SaveChanges();
+                return Json(new { success = true });
             }
-
-            var to = await _context.To
-                .FirstOrDefaultAsync(m => m.ID_To == id);
-            if (to == null)
-            {
-                return NotFound();
-            }
-
-            return View(to);
-        }
-
-        // POST: To/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.To == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.To'  is null.");
-            }
-            var to = await _context.To.FindAsync(id);
-            if (to != null)
-            {
-                _context.To.Remove(to);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = false });
         }
 
         private bool ToExists(string id)

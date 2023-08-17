@@ -1,40 +1,73 @@
 ﻿@model Unicorn.Models.CV
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Thông tin chức vụ";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}<
 
-<h1>Edit</h1>
-
-<h4>CV</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Chức vụ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index">Chức vụ</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin Chức vụ</h3>
+        </div>
+        <form asp-action="Edit" asp-controller="CV" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID_CV" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="card-body row">
+
+                <div class="col-5">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ID_CV" class="control-label">Mã chức vụ</label>
+                            <input asp-for="ID_CV" class="form-control" readonly />
+                            <span asp-validation-for="ID_CV" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Tên chức vụ</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Ghi_chu" class="control-label">Ghi chú</label>
+                            <input asp-for="Ghi_chu" class="form-control" />
+                            <span asp-validation-for="Ghi_chu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-primary">Trở lại</a>
+                            <input type="submit" value="Lưu" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Ghi_chu" class="control-label"></label>
-                <input asp-for="Ghi_chu" class="form-control" />
-                <span asp-validation-for="Ghi_chu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+
         </form>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    <!-- /.card -->
+</section>
+<!-- /.content -->
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

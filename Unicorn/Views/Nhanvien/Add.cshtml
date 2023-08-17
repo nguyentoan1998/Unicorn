@@ -4,7 +4,7 @@
     ViewData["Title"] = "Thêm nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }<
-
+<script src="~/js/site.js"></script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -62,6 +62,9 @@
                                 <label asp-for="ID_To" class="control-label"> Tổ:</label>
                                 <select asp-for="ID_To" class="form-control" asp-items="ViewBag.ID_ToList"></select>
                                 <span asp-validation-for="ID_To" class="text-danger"></span>
+                            </div>
+                            <div class="col-1 mt-4">
+                                <button class="btn btn-success" onclick="ShowToCreateModal();">+</button>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -148,7 +151,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
+    <script type="text/javascript">
         FileImage.onchange = evt => {
 
             const [file] = FileImage.files
@@ -156,7 +159,6 @@
             if (file) {
 
                 preview.src = URL.createObjectURL(file);
-
                 $("#preview").removeClass("hidden");
             }
         }

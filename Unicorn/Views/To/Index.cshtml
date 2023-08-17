@@ -1,42 +1,116 @@
 ﻿@model IEnumerable<Unicorn.Models.To>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách Tổ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ghi_chu)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ghi_chu)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_To">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_To">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_To">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Tổ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active">Tổ</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<div id="Nhanvien"></div>
+
+
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách Tổ</h3>
+            <div class="card-tools">
+                <a asp-action="Add" class="btn btn-success fa fa-plus">Thêm mới</a>
+            </div>
+        </div>
+        <br />
+        <div class="card card-solid">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã Tổ</th>
+                            <th>Tổ</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr id="trow_@item.ID_To">
+                                    <td>@i</td>
+                                    <td>@item.ID_To</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Ghi_chu</td>
+                                    <td>
+                                        <a href="#" data-id="@item.ID_To" class="btn btn-sm btn-danger btnDelete">Xoá</a>
+                                        <a asp-action="Edit" asp-route-id="@item.ID_To" class="btn btn-sm btn-primary">Sửa</a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4">Không có bản ghi nào</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer"></div>
+            <!-- /.card-footer-->
+        </div>
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<!-- Content Header (Page header) -->
+@*Scrip*@
+
+<script>
+    //Delete
+    $(document).ready(function () {
+        $('body').on('click', '.btnDelete', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Bạn có muốn xóa Tổ này khỏi danh sách không??');
+            if (conf === true) {
+                $.ajax({
+                    url: '/To/delete',
+                    type: 'Post',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#trow_' + id).remove();
+                            window.location.href = "/To/index";
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>
+
+

@@ -25,26 +25,8 @@ namespace Unicorn.Controllers
               return View(await _context.CV.ToListAsync());
         }
 
-        // GET: CV/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.CV == null)
-            {
-                return NotFound();
-            }
-
-            var cV = await _context.CV
-                .FirstOrDefaultAsync(m => m.ID_CV == id);
-            if (cV == null)
-            {
-                return NotFound();
-            }
-
-            return View(cV);
-        }
-
         // GET: CV/Create
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -54,7 +36,7 @@ namespace Unicorn.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_CV,Name,Ghi_chu")] CV cV)
+        public async Task<IActionResult> Add([Bind("ID_CV,Name,Ghi_chu")] CV cV)
         {
             if (ModelState.IsValid)
             {
@@ -116,41 +98,17 @@ namespace Unicorn.Controllers
             return View(cV);
         }
 
-        // GET: CV/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        [HttpPost]
+        public ActionResult Delete(string id)
         {
-            if (id == null || _context.CV == null)
+            var item = _context.CV.Find(id);
+            if (item != null)
             {
-                return NotFound();
+                _context.CV.Remove(item);
+                _context.SaveChanges();
+                return Json(new { success = true });
             }
-
-            var cV = await _context.CV
-                .FirstOrDefaultAsync(m => m.ID_CV == id);
-            if (cV == null)
-            {
-                return NotFound();
-            }
-
-            return View(cV);
-        }
-
-        // POST: CV/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.CV == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.CV'  is null.");
-            }
-            var cV = await _context.CV.FindAsync(id);
-            if (cV != null)
-            {
-                _context.CV.Remove(cV);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = false });
         }
 
         private bool CVExists(string id)

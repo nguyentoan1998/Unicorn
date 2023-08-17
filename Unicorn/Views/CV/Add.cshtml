@@ -1,7 +1,7 @@
-﻿@model Unicorn.Models.To
+﻿@model Unicorn.Models.CV
 
 @{
-    ViewData["Title"] = "Thay dổi thông tin Tổ";
+    ViewData["Title"] = "Thêm mới chức vụ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }<
 
@@ -10,11 +10,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý Tổ</h1>
+                <h1>Quản lý Chức vụ</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="Index">Tổ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Chức vụ</a></li>
                     <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
@@ -26,21 +26,21 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Thông tin Tổ</h3>
+            <h3 class="card-title">Thông tin thêm mới Chức vụ</h3>
         </div>
-        <form asp-action="Add" asp-controller="To" enctype="multipart/form-data">
+        <form asp-action="Add" asp-controller="CV" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="card-body row">
 
                 <div class="col-5">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label asp-for="ID_To" class="control-label">Mã Tổ</label>
-                            <input asp-for="ID_To" class="form-control" readonly/>
-                            <span asp-validation-for="ID_To" class="text-danger"></span>
+                            <label asp-for="ID_CV" class="control-label">Mã chức vụ</label>
+                            <input asp-for="ID_CV" class="form-control" />
+                            <span asp-validation-for="ID_CV" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Name" class="control-label">Tên Tổ</label>
+                            <label asp-for="Name" class="control-label">Tên chức vụ</label>
                             <input asp-for="Name" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
