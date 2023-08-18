@@ -31,8 +31,12 @@ namespace Unicorn.Models
         [Required(ErrorMessage = "Tổ không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
         public string ID_To { get; set; }
+        [NotMapped]
+        public string Name_To{ get; set; }
         [Required(ErrorMessage = "Chức vụ không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
         public string ID_Chucvu { get; set; }
+        [NotMapped]
+        public string Name_CV { get; set; }
     }
 }

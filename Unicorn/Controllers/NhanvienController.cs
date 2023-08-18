@@ -48,6 +48,10 @@ namespace Unicorn.Controllers
                 {
                     nV.Image = "/image/No_Image.png";
                 }
+                var To = await _DBContext.To.FindAsync(nV.ID_To);
+                var CV = await _DBContext.To.FindAsync(nV.ID_NV);
+                nV.Name_CV = CV.Name;
+                nV.Name_To = To.Name;
                 nV.Ngay_tao = DateTime.Now;
                 _DBContext.NV.Add(nV);
                 await _DBContext.SaveChangesAsync();
