@@ -1,5 +1,4 @@
 ﻿
-
 using System.ComponentModel;
 
 namespace Unicorn.Models
@@ -10,10 +9,9 @@ namespace Unicorn.Models
         [Key]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Mã nhân viên không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public string ID_NV { get; set; }
+        public String ID_NV { get; set; }
         public string Image { get;set; }
         [NotMapped]
-        [DisplayName("Profile Image")]
         public IFormFile ImageFile { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Tên nhân viên không được để trống")]
         [StringLength(50, ErrorMessage = "Không được vượt quá 50 ký tự")]
@@ -23,20 +21,22 @@ namespace Unicorn.Models
         [Required(ErrorMessage = "Vui lòng chọn giới tính")]
         public string Gioi_tinh { get; set; }
         public string Que_quan { set; get; }
+        [MaxLength(11, ErrorMessage ="số điện thoại không phù hợp")]
+        [MinLength(10, ErrorMessage = "Phải nhập tối thiểu 10 số")]
         public Nullable<int> SDT { set; get; }
+        [MaxLength(11, ErrorMessage = "số CMT không phù hợp")]
+        [MinLength(9, ErrorMessage = "Phải nhập tối thiểu 9 số")]
         public Nullable<int> CMT { set; get; }
         [Required(ErrorMessage = "Vui lòng nhập ngày vào")]
         public DateTime Ngay_vao { get; set; }
         public DateTime Ngay_tao { get; set; }
         [Required(ErrorMessage = "Tổ không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public string ID_To { get; set; }
-        [NotMapped]
+        public String ID_To { get; set; }
         public string Name_To{ get; set; }
         [Required(ErrorMessage = "Chức vụ không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public string ID_Chucvu { get; set; }
-        [NotMapped]
+        public String ID_Chucvu { get; set; }
         public string Name_CV { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Unicorn.Models;
 
 namespace Unicorn.Controllers
 {
@@ -14,9 +15,9 @@ namespace Unicorn.Controllers
             _DBContext = dBContext;
             _WebHost = webHost;
         }
-
+        #region Controller Nhân viên
         // GET: Nhanvien
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var item = _DBContext.NV;
             return View(item);
@@ -49,7 +50,7 @@ namespace Unicorn.Controllers
                     nV.Image = "/image/No_Image.png";
                 }
                 var To = await _DBContext.To.FindAsync(nV.ID_To);
-                var CV = await _DBContext.To.FindAsync(nV.ID_NV);
+                var CV = await _DBContext.CV.FindAsync(nV.ID_Chucvu);
                 nV.Name_CV = CV.Name;
                 nV.Name_To = To.Name;
                 nV.Ngay_tao = DateTime.Now;
@@ -114,7 +115,7 @@ namespace Unicorn.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_Chucvu")] NV nV)
+        public async Task<IActionResult> Edit(String id, [Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_Chucvu")] NV nV)
         {
             if (id != nV.ID_NV)
             {
@@ -159,7 +160,7 @@ namespace Unicorn.Controllers
             return View(nV);
         }
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(String id)
         {
             var item = _DBContext.NV.Find(id);
             if (item != null)
@@ -170,11 +171,58 @@ namespace Unicorn.Controllers
             }
             return Json(new { success = false });
         }
-        private bool NVExists(string id)
+        private bool NVExists(String id)
         {
             return _DBContext.NV.Any(e => e.ID_NV == id);
         }
+        #endregion
 
-        
+        #region Controller Modal Tổ
+        [HttpPost]
+        public JsonResult SaveToModal(Models.To model)
+        {
+            var result = false;
+            try
+            {
+                Models.To Stu = new Models.To();
+                Stu.ID_To = model.ID_To;
+                Stu.Name = model.Name;
+                Stu.Ghi_chu = model.Ghi_chu;
+                _DBContext.To.Add(Stu);
+                _DBContext.SaveChanges();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(result);
+        }
+        #endregion
+
+        #region Controller Modal Chức vụ
+        [HttpPost]
+        public JsonResult SaveCVModal(Models.CV model)
+        {
+            var result = false;
+            try
+            {
+                Models.CV Stu = new Models.CV();
+                Stu.ID_CV = model.ID_CV;
+                Stu.Name = model.Name;
+                Stu.Ghi_chu = model.Ghi_chu;
+                _DBContext.CV.Add(Stu);
+                _DBContext.SaveChanges();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(result);
+        }
+        #endregion
     }
 }

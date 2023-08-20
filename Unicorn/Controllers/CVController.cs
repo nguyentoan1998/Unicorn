@@ -68,7 +68,7 @@ namespace Unicorn.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID_CV,Name,Ghi_chu")] CV cV)
+        public async Task<IActionResult> Edit(String id, [Bind("ID_CV,Name,Ghi_chu")] CV cV)
         {
             if (id != cV.ID_CV)
             {
@@ -111,7 +111,7 @@ namespace Unicorn.Controllers
             return Json(new { success = false });
         }
 
-        private bool CVExists(string id)
+        private bool CVExists(String id)
         {
           return _context.CV.Any(e => e.ID_CV == id);
         }

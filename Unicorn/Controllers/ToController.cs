@@ -68,7 +68,7 @@ namespace Unicorn.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID_To,Name,Ghi_chu")] To to)
+        public async Task<IActionResult> Edit(String id, [Bind("ID_To,Name,Ghi_chu")] To to)
         {
             if (id != to.ID_To)
             {
@@ -100,7 +100,7 @@ namespace Unicorn.Controllers
 
 
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(String id)
         {
             var item = _context.To.Find(id);
             if (item != null)
@@ -112,9 +112,29 @@ namespace Unicorn.Controllers
             return Json(new { success = false });
         }
 
-        private bool ToExists(string id)
+        private bool ToExists(String id)
         {
           return _context.To.Any(e => e.ID_To == id);
+        }
+        public IActionResult AddModal()
+        {
+           return PartialView("~/Views/To/_AddModal.cshtml");
+        }
+
+        // POST: To/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddModal([Bind("ID_To,Name,Ghi_chu")] To to)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(to);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(to);
         }
     }
 }

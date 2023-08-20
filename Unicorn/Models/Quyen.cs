@@ -7,7 +7,7 @@ namespace Unicorn.Models
         [Key]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Mã quyền hạn không được để trống")]
         [MaxLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public string ID_Quyen { get; set; }
+        public String ID_Quyen { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Tên quyền hạn không được để trống")]
         [MaxLength(50, ErrorMessage = "Không được vượt quá 10 ký tự")]
         public string Name { get; set; }

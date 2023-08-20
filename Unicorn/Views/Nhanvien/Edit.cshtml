@@ -53,7 +53,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="Name" class="control-label"> Tên nhân viên:</label>
-                                    <input asp-for="Name" class="form-control" />
+                                    <input asp-for="Name" class="form-control" autocomplete="off" />
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="Nam_sinh" class="control-label">Năm sinh:</label>
-                                    <input asp-for="Nam_sinh" type="date" asp-format="@ViewBag.Date" class="form-control" />
+                                    <input asp-for="Nam_sinh" type="date" asp-format="@ViewBag.Date" class="form-control" autocomplete="off" />
                                     <span asp-validation-for="Nam_sinh" class="text-danger"></span>
                                 </div>
                             </div>
@@ -97,14 +97,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="SDT" class="control-label">Số điện thoại:</label>
-                                    <input asp-for="SDT" class="form-control" />
+                                    <input asp-for="SDT" class="form-control" autocomplete="off" />
                                     <span asp-validation-for="SDT" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="CMT" class="control-label">Chứng minh thư:</label>
-                                    <input asp-for="CMT" class="form-control" />
+                                    <input asp-for="CMT" class="form-control" autocomplete="off" />
                                     <span asp-validation-for="CMT" class="text-danger"></span>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Que_quan" class="control-label">Quê quán</label>
-                            <input asp-for="Que_quan" class="form-control" />
+                            <input asp-for="Que_quan" class="form-control" autocomplete="off" />
                             <span asp-validation-for="Que_quan" class="text-danger"></span>
                         </div>
                         <div class="form-group">
