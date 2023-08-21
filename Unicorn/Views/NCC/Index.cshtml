@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Unicorn.Models.CV>
+﻿@model IEnumerable<Unicorn.Models.NCC>
 
 @{
-    ViewData["Title"] = "Danh sách chức vụ";
+    ViewData["Title"] = "Danh sách Nhà cung cấp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,18 +13,18 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý Chức vụ</h1>
+                <h1>Quản lý Nhà cung cấp</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/Home">Home</a></li>
-                    <li class="breadcrumb-item active">Chức vụ</li>
+                    <li class="breadcrumb-item active">Nhà cung cấp</li>
                 </ol>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
-<div id="Nhanvien"></div>
+<div id="NCC"></div>
 
 
 
@@ -33,9 +33,9 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách Chức vụ</h3>
+            <h3 class="card-title">Danh sách Nhà cung cấp</h3>
             <div class="card-tools">
-                <a asp-action="Add" class="btn btn-success fa fa-plus">Thêm mới</a>
+                <a asp-action="Create" class="btn btn-success fa fa-plus">Thêm mới</a>
             </div>
         </div>
         <br />
@@ -45,9 +45,11 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Mã Chức vụ</th>
-                            <th>Tên Chức vụ</th>
+                            <th>Mã Nhà cung cấp</th>
+                            <th>Tên Nhà cung cấp</th>
+                            <th>Địa chỉ</th>
                             <th>Ghi chú</th>
+                            <th>Khách hàng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,14 +58,18 @@
                             var i = 1;
                             foreach (var item in Model)
                             {
-                                <tr id="trow_@item.ID_CV">
+                                <tr id="trow_@item.ID_NCC">
                                     <td>@i</td>
-                                    <td>@item.ID_CV</td>
+                                    <td>@item.ID_NCC</td>
                                     <td>@item.Name</td>
+                                    <td>@item.Dia_chi</td>
                                     <td>@item.Ghi_chu</td>
+                                    <td class="jsgrid-cell jsgrid-align-center" style="width: 200px;">
+                                        <input type="checkbox" disabled checked="@item.Is_KH">
+                                     </td>
                                     <td>
-                                        <a href="#" data-id="@item.ID_CV" class="btn btn-sm btn-danger btnDelete">Xoá</a>
-                                        <a asp-action="Edit" asp-route-id="@item.ID_CV" class="btn btn-sm btn-primary">Sửa</a>
+                                        <a href="#" data-id="@item.Is_KH" class="btn btn-sm btn-danger btnDelete">Xoá</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Is_KH" class="btn btn-sm btn-primary">Sửa</a>
                                     </td>
                                 </tr>
                                 i++;
@@ -95,10 +101,10 @@
     $(document).ready(function () {
         $('body').on('click', '.btnDelete', function () {
             var id = $(this).data("id");
-            var conf = confirm('Bạn có muốn xóa Chức vụ này khỏi danh sách không??');
+            var conf = confirm('Bạn có muốn xóa Nhà cung cấp này khỏi danh sách không??');
             if (conf === true) {
                 $.ajax({
-                    url: '/CV/delete',
+                    url: '/NCC/delete',
                     type: 'Post',
                     data: { id: id },
                     success: function (rs) {

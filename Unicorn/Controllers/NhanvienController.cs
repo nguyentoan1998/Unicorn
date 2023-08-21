@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using Unicorn.Models;
 
 namespace Unicorn.Controllers
@@ -38,8 +39,8 @@ namespace Unicorn.Controllers
                 {
                     string wwwRootPath = _WebHost.WebRootPath;
                     string Filename = Path.GetFileName(nV.ImageFile.FileName);
-                    nV.Image = "/Image/" +  Filename;
-                    string path = Path.Combine(wwwRootPath + "/Image", Filename);
+                    nV.Image = "/Image/" + "Nhanvien." + nV.ID_NV + ".png";
+                    string path = Path.Combine(wwwRootPath + "/Image/" + "Nhanvien." + nV.ID_NV + ".png");
                     using (var FileStream = new FileStream(path, FileMode.Create))
                     {
                         await nV.ImageFile.CopyToAsync(FileStream);
@@ -94,7 +95,7 @@ namespace Unicorn.Controllers
             ListTo.Insert(0, defItem);
             return ListTo;
         }
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(String id)
         {
             ViewBag.ID_ToList = ListToAll();
             ViewBag.ID_CVList = ListCVAll();
@@ -103,15 +104,15 @@ namespace Unicorn.Controllers
                 return NotFound();
             }
 
-            var nV = await _DBContext.NV.FindAsync(id);
-            ViewBag.Image = nV.Image;
-            ViewBag.Date = nV.Nam_sinh.ToString("yyyy-MM-dd");
-            ViewBag.Ngay_vao = nV.Ngay_vao.ToString("yyyy-MM-dd");
-            if (nV == null)
+            var nv = await _DBContext.NV.FindAsync(id);
+            ViewBag.Image = nv.Image;
+            ViewBag.Date = nv.Nam_sinh.ToString("yyyy-MM-dd");
+            ViewBag.Ngay_vao = nv.Ngay_vao.ToString("yyyy-MM-dd");
+            if (nv == null)
             {
                 return NotFound();
             }
-            return View(nV);
+            return View(nv);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -121,15 +122,14 @@ namespace Unicorn.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 if (nV.ImageFile != null)
                 {
                     string wwwRootPath = _WebHost.WebRootPath;
                     string Filename = Path.GetFileName(nV.ImageFile.FileName);
-                    nV.Image = "/Image/" + Filename;
-                    string path = Path.Combine(wwwRootPath + "/Image", Filename);
+                    nV.Image = "/Image/" + "Nhanvien." + nV.ID_NV + ".png";
+                    string path = Path.Combine(wwwRootPath + "/Image/" + "Nhanvien." + nV.ID_NV + ".png");
                     using (var FileStream = new FileStream(path, FileMode.Create))
                     {
                         await nV.ImageFile.CopyToAsync(FileStream);
@@ -137,10 +137,16 @@ namespace Unicorn.Controllers
                 }
                 else
                 {
-                    nV.Image = "/image/No_Image.png";
+                    //var image = await _DBContext.NV.FindAsync(nV.ID_NV);
+                    nV.Image = "/Image/" + "Nhanvien." + nV.ID_NV + ".png";
                 }
+                var To = await _DBContext.To.FindAsync(nV.ID_To);
+                var CV = await _DBContext.CV.FindAsync(nV.ID_Chucvu);
+                nV.Name_CV = CV.Name;
+                nV.Name_To = To.Name;
                 try
                 {
+
                     _DBContext.Update(nV);
                     await _DBContext.SaveChangesAsync();
                 }

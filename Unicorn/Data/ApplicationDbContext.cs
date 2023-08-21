@@ -6,6 +6,7 @@ namespace Unicorn.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
         public DbSet<CV> CV { get; set; }
         public DbSet<KH> KH { get; set; }

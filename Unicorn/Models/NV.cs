@@ -21,11 +21,7 @@ namespace Unicorn.Models
         [Required(ErrorMessage = "Vui lòng chọn giới tính")]
         public string Gioi_tinh { get; set; }
         public string Que_quan { set; get; }
-        [MaxLength(11, ErrorMessage ="số điện thoại không phù hợp")]
-        [MinLength(10, ErrorMessage = "Phải nhập tối thiểu 10 số")]
         public Nullable<int> SDT { set; get; }
-        [MaxLength(11, ErrorMessage = "số CMT không phù hợp")]
-        [MinLength(9, ErrorMessage = "Phải nhập tối thiểu 9 số")]
         public Nullable<int> CMT { set; get; }
         [Required(ErrorMessage = "Vui lòng nhập ngày vào")]
         public DateTime Ngay_vao { get; set; }

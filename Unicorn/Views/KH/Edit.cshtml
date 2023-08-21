@@ -1,0 +1,83 @@
+﻿@model Unicorn.Models.KH
+
+@{
+    ViewData["Title"] = "Thông tin Khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}<
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý Khách hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index">Khách hàng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin Khách hàng</h3>
+        </div>
+        <form asp-action="Edit" asp-controller="KH" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body row">
+
+                <div class="col-5">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ID_KH" class="control-label">Mã Khách hàng</label>
+                            <input asp-for="ID_KH" class="form-control" readonly />
+                            <span asp-validation-for="ID_KH" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Tên Khách hàng</label>
+                            <input asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Dia_chi" class="control-label">Địa chỉ</label>
+                            <input asp-for="Dia_chi" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Dia_chi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Ghi_chu" class="control-label">Ghi chú</label>
+                            <input asp-for="Ghi_chu" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Ghi_chu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group custom-control custom-checkbox">
+                            <input asp-for="Is_NCC" class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" autocomplete="off" />
+                            <label asp-for="Is_NCC" class="custom-control-label">Nhà cung cấp</label>
+                            <span asp-validation-for="Is_NCC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-primary">Trở lại</a>
+                            <input type="submit" value="Lưu" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
