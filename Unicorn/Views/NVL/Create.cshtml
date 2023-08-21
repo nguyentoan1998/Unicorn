@@ -1,0 +1,84 @@
+﻿@model Unicorn.Models.NVL
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>NVL</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID_NVL" class="control-label"></label>
+                <input asp-for="ID_NVL" class="form-control" />
+                <span asp-validation-for="ID_NVL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID_DVT" class="control-label"></label>
+                <input asp-for="ID_DVT" class="form-control" />
+                <span asp-validation-for="ID_DVT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mo_ta" class="control-label"></label>
+                <input asp-for="Mo_ta" class="form-control" />
+                <span asp-validation-for="Mo_ta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SL_ton" class="control-label"></label>
+                <input asp-for="SL_ton" class="form-control" />
+                <span asp-validation-for="SL_ton" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nguon_goc" class="control-label"></label>
+                <input asp-for="Nguon_goc" class="form-control" />
+                <span asp-validation-for="Nguon_goc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DG_mua" class="control-label"></label>
+                <input asp-for="DG_mua" class="form-control" />
+                <span asp-validation-for="DG_mua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DG_ban" class="control-label"></label>
+                <input asp-for="DG_ban" class="form-control" />
+                <span asp-validation-for="DG_ban" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID_Loai" class="control-label"></label>
+                <input asp-for="ID_Loai" class="form-control" />
+                <span asp-validation-for="ID_Loai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
