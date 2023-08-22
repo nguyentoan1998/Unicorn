@@ -28,6 +28,18 @@
 <div id="NVL"></div>
 
 <!-- Main content -->
+@*<section class="content">
+    <div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách Nguyên vật liệu</h3>
+        <div class="card-tools">
+            <a asp-action="Create" class="btn btn-success fa fa-plus">Thêm mới</a>
+        </div>
+    </div>
+    <br />
+</section>*@
+<!-- /.content -->
+<!-- Content Header (Page header) -->
 <section class="content">
     <div class="card">
         <div class="card-header">
@@ -36,22 +48,21 @@
                 <a asp-action="Create" class="btn btn-success fa fa-plus">Thêm mới</a>
             </div>
         </div>
-        <br />
-        <div class="container-fluid">
+        <div class="card card-solid">
             <div class="card-body">
-                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div id="tblNVL_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                            <table id="tblNVL" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="tblNVL_info">
                                 <thead>
                                     <tr>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Hình ảnh</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Mã Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Tên Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Loại Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Đơn vị tính</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kích thước</th>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Hình ảnh</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Mã Nguyên vật liệu</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Tên Nguyên vật liệu</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Loại Nguyên vật liệu</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Đơn vị tính</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kích thước</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,12 +88,6 @@
                                             i++;
                                         }
                                     }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="4">Không có bản ghi nào</td>
-                                        </tr>
-                                    }
                                 </tbody>
                                 <tfoot>
                                 </tfoot>
@@ -94,10 +99,7 @@
         </div>
     </div>
 </section>
-
-
 @*Scrip*@
-
 <script>
     //Delete
     $(document).ready(function () {
@@ -119,10 +121,10 @@
         })
     })
     $(function () {
-        $("#example1").DataTable({
+        $("#tblNVL").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
     });
 </script>
 
