@@ -7,7 +7,6 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/clients/plugins/datatables-buttons/js/buttons.html5.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <section class="content-header">
@@ -41,64 +40,63 @@
 <!-- /.content -->
 <!-- Content Header (Page header) -->
 <section class="content">
-    <div class="card">
+    <div class="container-fluid">
         <div class="card-header">
-            <h3 class="card-title">Danh sách Nguyên vật liệu</h3>
+            <h3 class="card-title">Danh sách nguyên vật liệu</h3>
             <div class="card-tools">
                 <a asp-action="Create" class="btn btn-success fa fa-plus">Thêm mới</a>
             </div>
         </div>
-        <div class="card card-solid">
-            <div class="card-body">
-                <div id="tblNVL_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="tblNVL" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="tblNVL_info">
-                                <thead>
-                                    <tr>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Hình ảnh</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Mã Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Tên Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Loại Nguyên vật liệu</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Đơn vị tính</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kích thước</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null && Model.Any())
+        <div class="card-body">
+            <div id="tblNVL_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="tblNVL" class="table table-hover table-striped dataTable dtr-inline" aria-describedby="tblNVL_info">
+                            <thead>
+                                <tr>
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-sort="ascending">STT</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Hình ảnh</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Mã Nguyên vật liệu</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Tên Nguyên vật liệu</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Loại Nguyên vật liệu</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Đơn vị tính</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Kích thước</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    var i = 1;
+                                    foreach (var item in Model)
                                     {
-                                        var i = 1;
-                                        foreach (var item in Model)
-                                        {
-                                            <tr id="trow_@item.ID_NVL">
-                                                <td>@i</td>
-                                                <td><img src="@item.Image" /></td>
-                                                <td>@item.ID_NVL</td>
-                                                <td>@item.Name</td>
-                                                <td>@item.ID_NVL</td>
-                                                <td>@item.ID_DVT</td>
-                                                <td>@item.Size</td>
-                                                <td>
-                                                    <a href="#" data-id="@item.ID_NVL" class="btn btn-sm btn-danger btnDelete">Xoá</a>
-                                                    <a asp-action="Details" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Xem</a>
-                                                    <a asp-action="Edit" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Sửa</a>
-                                                </td>
-                                            </tr>
-                                            i++;
-                                        }
+                                        <tr id="trow_@item.ID_NVL">
+                                            <td>@i</td>
+                                            <td><img src="@item.Image" /></td>
+                                            <td>@item.ID_NVL</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.ID_NVL</td>
+                                            <td>@item.ID_DVT</td>
+                                            <td>@item.Size</td>
+                                            <td>
+                                                <a href="#" data-id="@item.ID_NVL" class="btn btn-sm btn-danger btnDelete">Xoá</a>
+                                                <a asp-action="Details" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Xem</a>
+                                                <a asp-action="Edit" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Sửa</a>
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
-                                </tbody>
-                                <tfoot>
-                                </tfoot>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @*Scrip*@
 <script>
     //Delete
@@ -118,14 +116,18 @@
                     }
                 })
             }
-        })
-    })
-    $(function () {
+        });
         $("#tblNVL").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
-    });
+    })
+    //$(function () {
+    //    $("#tblNVL").DataTable({
+    //        "responsive": true, "lengthChange": false, "autoWidth": false,
+    //        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    //    }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
+    //});
 </script>
 
 
