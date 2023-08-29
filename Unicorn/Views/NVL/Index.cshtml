@@ -4,10 +4,7 @@
     ViewData["Title"] = "Danh sách Nguyên vật liệu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <section class="content-header">
     <div class="container-fluid">
@@ -27,16 +24,6 @@
 <div id="NVL"></div>
 
 <!-- Main content -->
-@*<section class="content">
-    <div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Danh sách Nguyên vật liệu</h3>
-        <div class="card-tools">
-            <a asp-action="Create" class="btn btn-success fa fa-plus">Thêm mới</a>
-        </div>
-    </div>
-    <br />
-</section>*@
 <!-- /.content -->
 <!-- Content Header (Page header) -->
 <section class="content">
@@ -48,56 +35,29 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="tblNVL_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="tblNVL" class="table table-hover table-striped dataTable dtr-inline" aria-describedby="tblNVL_info">
-                            <thead>
-                                <tr>
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1" aria-sort="ascending">STT</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Hình ảnh</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Mã Nguyên vật liệu</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Tên Nguyên vật liệu</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Loại Nguyên vật liệu</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Đơn vị tính</th>
-                                    <th class="sorting" tabindex="0" aria-controls="tblNVL" rowspan="1" colspan="1">Kích thước</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null && Model.Any())
-                                {
-                                    var i = 1;
-                                    foreach (var item in Model)
-                                    {
-                                        <tr id="trow_@item.ID_NVL">
-                                            <td>@i</td>
-                                            <td><img src="@item.Image" /></td>
-                                            <td>@item.ID_NVL</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.ID_NVL</td>
-                                            <td>@item.ID_DVT</td>
-                                            <td>@item.Size</td>
-                                            <td>
-                                                <a href="#" data-id="@item.ID_NVL" class="btn btn-sm btn-danger btnDelete">Xoá</a>
-                                                <a asp-action="Details" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Xem</a>
-                                                <a asp-action="Edit" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Sửa</a>
-                                            </td>
-                                        </tr>
-                                        i++;
-                                    }
-                                }
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <table id="tblNVL" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Mã vật liệu</th>
+                        <th>Tên vật liệu</th>
+                        <th>Loại vật liệu</th>
+                        <th>Đơn vị tính</th>
+                        <th>Kích thước</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
 
+
 @*Scrip*@
+
+
 <script>
     //Delete
     $(document).ready(function () {
@@ -117,17 +77,36 @@
                 })
             }
         });
-        $("#tblNVL").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
+        $('#tblNVL').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": true,
+            "ajax": {
+                "url": "/Appi/GetNVL",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columnDefs": [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }],
+            "columns": [
+                { "data": "Image", "name": "Hình ảnh", "autoWidth": true },
+                { "data": "ID_NVL", "name": "Mã vật liệu", "autoWidth": true },
+                { "data": "Name", "name": "Tên vật liệu", "autoWidth": true },
+                { "data": "ID_Loai", "name": "Loại vật liệu", "autoWidth": true },
+                { "data": "ID_DVT", "name": "Đơn vị tính", "autoWidth": true },
+                { "data": "Size", "name": "Kích thước", "autoWidth": true },
+                {
+                    "render": function (data, row) { return "<a href='#' class='btn btn-danger' onclick=DeleteCustomer('" + row.id + "'); >Delete</a>"; }
+                },
+            ]
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
     })
-    //$(function () {
-    //    $("#tblNVL").DataTable({
-    //        "responsive": true, "lengthChange": false, "autoWidth": false,
-    //        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    //    }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
-    //});
 </script>
 
 

@@ -24,6 +24,12 @@ namespace Unicorn.Controllers
         {
               return View(await _context.NVL.ToListAsync());
         }
+        [HttpGet]
+        public async Task<IActionResult> GetData()
+        {
+            var _NVL = await _context.NVL.ToListAsync();
+            return Json(new { data = _NVL });
+        }
 
         // GET: NVL/Details/5
         public async Task<IActionResult> Details(string id)

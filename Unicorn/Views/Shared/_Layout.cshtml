@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="~/clients/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/clients/dist/css/adminlte.min.css">
+    <!--Datatable-->
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/clients/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
@@ -28,10 +32,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @*<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>*@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/clients/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/clients/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/clients/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -340,23 +340,19 @@
     <script src="~/clients/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/clients/dist/js/adminlte.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="~/clients/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/clients/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/clients/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/clients/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/clients/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/clients/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/clients/plugins/jszip/jszip.min.js"></script>
-    <script src="~/clients/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="~/clients/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="~/clients/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/clients/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="~/clients/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/clients/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="~/clients/dist/js/pages/dashboard.js"></script>
+@*    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/clients/dist/js/pages/dashboard.js"></script>*@
+    <!--Datatable-->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
