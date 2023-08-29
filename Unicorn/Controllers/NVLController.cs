@@ -22,15 +22,8 @@ namespace Unicorn.Controllers
         // GET: NVL
         public async Task<IActionResult> Index()
         {
-              return View(await _context.NVL.ToListAsync());
+            return View(await _context.NVL.ToListAsync());
         }
-        [HttpGet]
-        public async Task<IActionResult> GetData()
-        {
-            var _NVL = await _context.NVL.ToListAsync();
-            return Json(new { data = _NVL });
-        }
-
         // GET: NVL/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -120,7 +113,9 @@ namespace Unicorn.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(nVL);
+
         }
+        [HttpPost]
         public ActionResult Delete(String id)
         {
             var item = _context.NVL.Find(id);
@@ -132,9 +127,10 @@ namespace Unicorn.Controllers
             }
             return Json(new { success = false });
         }
-        private bool NVLExists(string id)
+        private bool NVLExists(String id)
         {
-          return _context.NVL.Any(e => e.ID_NVL == id);
+            return _context.NVL.Any(e => e.ID_NVL == id);
         }
     }
+
 }

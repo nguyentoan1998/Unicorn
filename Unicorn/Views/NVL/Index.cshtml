@@ -35,9 +35,10 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="tblNVL" class="display nowrap" style="width:100%">
+            <table id="tblNVL" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="tblNVL_info" style="width:100%">
                 <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Hình ảnh</th>
                         <th>Mã vật liệu</th>
                         <th>Tên vật liệu</th>
@@ -47,7 +48,26 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.ID_NVL">
+                                <td>@i</td>
+                                <td>@item.ID_NVL</td>
+                                <td>@item.Name</td>
+                                <td>@item.ID_Loai</td>
+                                <td>@item.ID_DVT</td>
+                                <td>@item.Size</td>
+                                <td>
+                                    <a href="#" data-id="@item.ID_NVL" class="btn btn-sm btn-danger btnDelete">Xoá</a>
+                                    <a asp-action="Edit" asp-route-id="@item.ID_NVL" class="btn btn-sm btn-primary">Sửa</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
                 </tbody>
             </table>
         </div>
@@ -77,36 +97,12 @@
                 })
             }
         });
-        $('#tblNVL').dataTable({
-            "processing": true,
-            "serverSide": true,
-            "filter": true,
-            "ajax": {
-                "url": "/Appi/GetNVL",
-                "type": "POST",
-                "datatype": "json"
-            },
-            "columnDefs": [{
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            }],
-            "columns": [
-                { "data": "Image", "name": "Hình ảnh", "autoWidth": true },
-                { "data": "ID_NVL", "name": "Mã vật liệu", "autoWidth": true },
-                { "data": "Name", "name": "Tên vật liệu", "autoWidth": true },
-                { "data": "ID_Loai", "name": "Loại vật liệu", "autoWidth": true },
-                { "data": "ID_DVT", "name": "Đơn vị tính", "autoWidth": true },
-                { "data": "Size", "name": "Kích thước", "autoWidth": true },
-                {
-                    "render": function (data, row) { return "<a href='#' class='btn btn-danger' onclick=DeleteCustomer('" + row.id + "'); >Delete</a>"; }
-                },
-            ]
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    })
+        $("tbody").load(function(){
+            $('#tblNVL').DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
+        })
 </script>
 
 
