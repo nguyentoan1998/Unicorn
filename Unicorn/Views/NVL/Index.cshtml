@@ -76,11 +76,10 @@
 
 
 @*Scrip*@
-
-
 <script>
-    //Delete
+    
     $(document).ready(function () {
+        //Delete
         $('body').on('click', '.btnDelete', function () {
             var id = $(this).data("id");
             var conf = confirm('Bạn có muốn xóa Nguyên vật liệu này khỏi danh sách không??');
@@ -97,12 +96,12 @@
                 })
             }
         });
-        $("tbody").load(function(){
-            $('#tblNVL').DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
-        })
+        //DataTable
+        $('#tblNVL').DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tblNVL_wrapper .col-md-6:eq(0)');
+    })
 </script>
 
 
