@@ -182,53 +182,5 @@ namespace Unicorn.Controllers
             return _DBContext.NV.Any(e => e.ID_NV == id);
         }
         #endregion
-
-        #region Controller Modal Tổ
-        [HttpPost]
-        public JsonResult SaveToModal(Models.To model)
-        {
-            var result = false;
-            try
-            {
-                Models.To Stu = new Models.To();
-                Stu.ID_To = model.ID_To;
-                Stu.Name = model.Name;
-                Stu.Ghi_chu = model.Ghi_chu;
-                _DBContext.To.Add(Stu);
-                _DBContext.SaveChanges();
-                result = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return Json(result);
-        }
-        #endregion
-
-        #region Controller Modal Chức vụ
-        [HttpPost]
-        public JsonResult SaveCVModal(Models.CV model)
-        {
-            var result = false;
-            try
-            {
-                Models.CV Stu = new Models.CV();
-                Stu.ID_CV = model.ID_CV;
-                Stu.Name = model.Name;
-                Stu.Ghi_chu = model.Ghi_chu;
-                _DBContext.CV.Add(Stu);
-                _DBContext.SaveChanges();
-                result = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return Json(result);
-        }
-        #endregion
     }
 }

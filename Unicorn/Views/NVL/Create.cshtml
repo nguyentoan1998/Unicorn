@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -29,65 +28,163 @@
         <div class="card-header">
             <h3 class="card-title">Thông tin thêm mới Nguyên vật liệu</h3>
         </div>
-        <form asp-action="Create">
+        <form asp-action="Add" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID_NVL" class="control-label"></label>
-                <input asp-for="ID_NVL" class="form-control" />
-                <span asp-validation-for="ID_NVL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_DVT" class="control-label"></label>
-                <input asp-for="ID_DVT" class="form-control" />
-                <span asp-validation-for="ID_DVT" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Mo_ta" class="control-label"></label>
-                <input asp-for="Mo_ta" class="form-control" />
-                <span asp-validation-for="Mo_ta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SL_ton" class="control-label"></label>
-                <input asp-for="SL_ton" class="form-control" />
-                <span asp-validation-for="SL_ton" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nguon_goc" class="control-label"></label>
-                <input asp-for="Nguon_goc" class="form-control" />
-                <span asp-validation-for="Nguon_goc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DG_mua" class="control-label"></label>
-                <input asp-for="DG_mua" class="form-control" />
-                <span asp-validation-for="DG_mua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DG_ban" class="control-label"></label>
-                <input asp-for="DG_ban" class="form-control" />
-                <span asp-validation-for="DG_ban" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
-                <span asp-validation-for="Size" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ID_Loai" class="control-label"></label>
-                <input asp-for="ID_Loai" class="form-control" />
-                <span asp-validation-for="ID_Loai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label asp-for="ID_NVL" class="control-label">Mã nguyên vật liệu:</label>
+                            <input asp-for="ID_NVL" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ID_NVL" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Tên nguyên vật liệu:</label>
+                            <input asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label asp-for="ID_DVT" class="control-label">Đơn vị tính:</label>
+                            <input asp-for="ID_DVT" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ID_DVT" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label asp-for="ID_Loai" class="control-label">Loại vật liệu:</label>
+                            <input asp-for="ID_Loai" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ID_Loai" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label asp-for="SL_ton" class="control-label">Số lượng tồn:</label>
+                            <input asp-for="SL_ton" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="SL_ton" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Mo_ta" class="control-label">Mô tả:</label>
+                        <input asp-for="Mo_ta" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Mo_ta" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Nguon_goc" class="control-label">Nguồn gốc:</label>
+                        <input asp-for="Nguon_goc" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Nguon_goc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label asp-for="DG_mua" class="control-label">Đơn giá mua:</label>
+                            <input asp-for="DG_mua" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="DG_mua" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label asp-for="DG_ban" class="control-label">Đơn giá bán:</label>
+                            <input asp-for="DG_ban" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="DG_ban" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-header p-0 border-bottom-0">
+                                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Đặc tính, hình ảnh</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Đơn vị chuyển đổi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Mã quy cách</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="custom-tabs-four-tabContent">
+                                    <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                                        
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                                        <div class="button-group">
+                                            <a class="btn btn-success fa fa-plus" onclick="AddRowdv()">Thêm</a>
+                                            <a class="btn btn-success fa fa-plus" onclick="SaveRowdv()">Lưu dữ liệu</a>
+                                        </div>
+                                        <table id="myTableDV" class="table table-bordered table-hover table-striped dataTable dtr-inline">
+                                            <tr>
+                                                <th width="100">Họ và Tên</th>
+                                                <th>Tuổi</th>
+                                                <th>Giới Tính</th>
+                                                <th width="50"></th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" name="ho_ten"></td>
+                                                <td><input type="number" name="tuoi"></td>
+                                                <td>
+                                                    <select name="gioi_tinh">
+                                                        <option value="nam">Nam</option>
+                                                        <option value="nu">Nữ</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <a href="#" onclick="deleteRow(this)" class="btn btn-sm btn-danger btnDelete fa fa-trash">Xoá</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                                        <div class="button-group">
+                                            <a class="btn btn-success fa fa-plus" onclick="AddRowmqc()">Thêm</a>
+                                            <a class="btn btn-success fa fa-plus" onclick="SaveRowmqc()">Lưu dữ liệu</a>
+                                        </div>
+                                        <table id="myTableMQC" class="table table-bordered table-hover table-striped dataTable dtr-inline">
+                                            <tr>
+                                                <th width="100">Họ và Tên</th>
+                                                <th>Tuổi</th>
+                                                <th>Giới Tính</th>
+                                                <th width="50"></th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" name="ho_ten"></td>
+                                                <td><input type="number" name="tuoi"></td>
+                                                <td>
+                                                    <select name="gioi_tinh">
+                                                        <option value="nam">Nam</option>
+                                                        <option value="nu">Nữ</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <a href="#" onclick="deleteRow(this)" class="btn btn-sm btn-danger btnDelete fa fa-trash">Xoá</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-primary">Trở lại</a>
+                    <input type="submit" value="Lưu" class="btn btn-success" />
+                </div>
             </div>
         </form>
         <!-- /.card-body -->
@@ -98,8 +195,45 @@
     <!-- /.card -->
 </section>
 <!-- /.content -->
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<script>
+    function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        var table = row.parentNode;
+        table.deleteRow(row.rowIndex);
+    }
+    function AddRowdv() {
+        var table = document.getElementById("myTableDV");
+        var newRow = table.insertRow(table.rows.length);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = '<input type="text" name="ho_ten">';
+        cell2.innerHTML = '<input type="number" name="tuoi">';
+        cell3.innerHTML = '<select name="gioi_tinh"><option value="nam">Nam</option><option value="nu">Nữ</option></select>';
+        cell4.innerHTML = '<a href="#" onclick="deleteRow(this)" class="btn btn-sm btn-danger btnDelete fa fa-trash">Xoá</a>';
+    }
+    function AddRowmqc() {
+        var table = document.getElementById("myTableMQC");
+        var newRow = table.insertRow(table.rows.length);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = '<input type="text" name="ho_ten">';
+        cell2.innerHTML = '<input type="number" name="tuoi">';
+        cell3.innerHTML = '<select name="gioi_tinh"><option value="nam">Nam</option><option value="nu">Nữ</option></select>';
+        cell4.innerHTML = '<a href="#" onclick="deleteRow(this)" class="btn btn-sm btn-danger btnDelete fa fa-trash">Xoá</a>';
+    }
+</script>

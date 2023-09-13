@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "Thêm nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}<
-<script src="~/js/site.js"></script>
+}
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -35,7 +34,7 @@
                     <div class="form-group">
                         <label class="comtrol-label">Preview Image</label>
                         <br />
-                        <img decoding="async" src="/Image/No_Image.png" asp-append-version="true" class="hidden" id="preview" />
+                        <img decoding="async" src="/Image/No_Image.png" asp-append-version="true" class="hidden" id="preview" width="300" height="300"/>
                         <br />
                     </div>
                 </div>
@@ -60,24 +59,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="ID_To" class="control-label"> Tổ:</label>
-                                <div class="input-group">
-                                    <select asp-for="ID_To" class="form-control" asp-items="ViewBag.ID_ToList" id="ListTo"></select>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-success btn-flat btn-sm" onclick="AddToModal()">+</button>
-                                    </span>
-                                </div>
+                                <select asp-for="ID_To" class="form-control" asp-items="ViewBag.ID_ToList" id="ListTo"></select>
                                 <span asp-validation-for="ID_To" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="ID_Chucvu" class="control-label"> Chức vụ:</label>
-                                <div class="input-group">
-                                    <select asp-for="ID_Chucvu" class="form-control" asp-items="ViewBag.ID_CVList" id="ListCV"></select>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-success btn-flat btn-sm" onclick="AddCVModal()">+</button>
-                                    </span>
-                                </div>
+                                <select asp-for="ID_Chucvu" class="form-control" asp-items="ViewBag.ID_CVList" id="ListCV"></select>
                                 <span asp-validation-for="ID_Chucvu" class="text-danger"></span>
                             </div>
                         </div>
@@ -156,82 +145,6 @@
 </section>
 <!-- /.content -->
 
-<!--Tạo Modal thêm Tổ-->
-
-<div class="modal fade" id="AddToModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 id="ModalTitle">Thêm mới Tổ</h4>
-            </div>
-            <div class="modal-body">
-                <form id="FormAddTo">
-                    <fieldset id="SubmitForm">
-                        <div class="form-group">
-                            <label for="txtID_To">Mã Tổ:</label>
-                            <input type="text" class="form-control" name="txtID_To" id="txtID_To" autocomplete="off>
-                            <span id="spamID_To" style="color:red"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtNameTo">Tên Tổ:</label>
-                            <input type="text" class="form-control" name="txtNameTo" id="txtNameTo" autocomplete="off>
-                            <span id="spamNameTo" style="color:red"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtNoteTo">Ghi chú:</label>
-                            <input type="text" class="form-control" name="txtNoteTo" id="txtNoteTo" autocomplete="off>
-                        </div>
-                        <div class="form-group">
-                            <a class="btn btn-primary" onclick="SaveToModal()">Lưu</a>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Két thúc Modal-->
-
-<!--Tạo Modal thêm chức vụ-->
-
-<div class="modal fade" id="AddCVModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 id="ModalTitle">Thêm mới Chức vụ</h4>
-            </div>
-            <div class="modal-body">
-                <form id="FormAddCV">
-                    <fieldset id="SubmitForm">
-                        <div class="form-group">
-                            <label for="txtID_CV">Mã Chức vụ:</label>
-                            <input type="text" class="form-control" name="txtID_CV" id="txtID_CV" autocomplete="off">
-                            <span id="spamID_CV" style="color:red"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtNameCV">Tên Chức vụ:</label>
-                            <input type="text" class="form-control" name="txtNameCV" id="txtNameCV autocomplete="off">
-                            <span id="spamNameCV" style="color:red"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtNoteCV">Ghi chú:</label>
-                            <input type="text" class="form-control" name="txtNoteCV" id="txtNoteCV autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <a class="btn btn-primary" onclick="SaveCVModal()">Lưu</a>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Két thúc Modal-->
-
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
@@ -244,160 +157,6 @@
                 preview.src = URL.createObjectURL(file);
                 $("#preview").removeClass("hidden");
             }
-        }
-        function AddToModal() {
-            $("#FormAddTo")[0].reset();
-            $("#AddToModal").modal('show');
-
-        }
-        function SaveToModal(){
-            var ID_To = $("#txtID_To").val();
-            var NameTo = $("#txtNameTo").val();
-            var NoteTo = $("#NoteTo").val();
-            if (ID_To == "") {
-                document.getElementById('spamID_To').innerText = "Mã Tổ không được đẻ trống";
-                return;
-            }
-            else
-            {
-                if (ID_To.length > 10) {
-                    document.getElementById('spamID_To').innerText = "Không được vượt quá 10 ký tự";
-                    return;
-                }
-                else {
-                    document.getElementById('spamID_To').innerText = "";
-                }
-            }
-            if (NameTo == "") {
-                document.getElementById('spamNameTo').innerText = "Tên Tổ không được đẻ trống";
-                return;
-            }
-            else {
-                if (NameTo.length > 50) {
-                    document.getElementById('spamNameTo').innerText = "Không được vượt quá 50 ký tự";
-                    return;
-                }
-                else
-                {
-                    document.getElementById('spamNameTo').innerText = "";
-                }
-            }
-            var data = {
-                ID_To: ID_To,
-                Name: NameTo,
-                Ghi_chu: NoteTo
-
-            }
-            $.ajax({
-                type: "Post",
-                url: "/Nhanvien/SaveToModal",
-                data: {
-                    model: data
-                },
-                success: function (result) {
-                    alert("Thêm dữ liệu thành công!!!");
-                    $("#AddToModal").modal('hide');
-                    FillTo("ListTo");
-
-                }
-            })
-        }
-        function AddCVModal() {
-            $("#FormAddCV")[0].reset();
-            $("#AddCVModal").modal('show');
-
-        }
-        function SaveCVModal() {
-            var ID_CV = $("#txtID_CV").val();
-            var NameCV = $("#txtNameCV").val();
-            var NoteCV = $("#NoteCV").val();
-            if (ID_CV == "") {
-                document.getElementById('spamID_CV').innerText = "Mã chức vụ không được đẻ trống";
-                return;
-            }
-            else {
-                if (ID_CV.length > 10) {
-                    document.getElementById('spamID_CV').innerText = "Không được vượt quá 10 ký tự";
-                    return;
-                }
-                else {
-                    document.getElementById('spamID_CV').innerText = "";
-                }
-            }
-            if (NameCV == "") {
-                document.getElementById('spamNameCV').innerText = "Tên chức vụ không được đẻ trống";
-                return;
-            }
-            else {
-                if (NameCV.length > 50) {
-                    document.getElementById('spamNameCV').innerText = "Không được vượt quá 50 ký tự";
-                    return;
-                }
-                else {
-                    document.getElementById('spamNameCV').innerText = "";
-                }
-            }
-            var data = {
-                ID_CV: ID_CV,
-                Name: NameCV,
-                Ghi_chu: NoteCV
-
-            }
-            $.ajax({
-                type: "Post",
-                url: "/Nhanvien/SaveCVModal",
-                data: {
-                    model: data
-                },
-                success: function (result) {
-                    alert("Thêm dữ liệu thành công!!!");
-                    $("#AddCVModal").modal('hide');
-                    FillCV("ListCV");
-                }
-            })
-        }
-        function FillTo(ListTo){
-            var _ListTo = $("#" + ListTo);
-            _ListTo.empty();
-            //_ListTo.append($('<option/>',
-            //{
-            //        value: null,
-            //        text: "----- Select Tổ -----"
-            //}));
-            $.getJSON("/Nhanvien/ListToAll", function(ListsTo){
-                if (ListsTo != null && !jQuery.isEmptyObject(ListsTo))
-                {
-                    $.each(ListsTo, function(index, _to){
-                        _ListTo.append($('<option/>',
-                            {
-                                value: _to.value,
-                                text: _to.text
-                            }));
-                    });
-                };
-            });
-            return;
-        }
-        function FillCV(ListCV) {
-            var _ListCV = $("#" + ListCV);
-            _ListCV.empty();
-            //_ListCV.append($('<option/>',
-            //    {
-            //        value: null,
-            //        text: "----- Select Chức vụ -----"
-            //    }));
-            $.getJSON("/Nhanvien/ListCVAll", function (ListsCV) {
-                if (ListsCV != null && !jQuery.isEmptyObject(ListsCV)) {
-                    $.each(ListsCV, function (index, _cv) {
-                        _ListCV.append($('<option/>',
-                            {
-                                value: _cv.value,
-                                text: _cv.text
-                            }));
-                    });
-                };
-            });
-            return;
         }
     </script>
 
