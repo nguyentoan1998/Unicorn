@@ -31,7 +31,7 @@ namespace Unicorn.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add([Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_Chucvu")] NV nV)
+        public async Task<ActionResult> Add([Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_CV")] NV nV)
         {
             if (ModelState.IsValid)
             {
@@ -46,15 +46,6 @@ namespace Unicorn.Controllers
                         await nV.ImageFile.CopyToAsync(FileStream);
                     }
                 }    
-                else
-                {
-                    nV.Image = "/image/No_Image.png";
-                }
-                var To = await _DBContext.To.FindAsync(nV.ID_To);
-                var CV = await _DBContext.CV.FindAsync(nV.ID_Chucvu);
-                nV.Name_CV = CV.Name;
-                nV.Name_To = To.Name;
-                nV.Ngay_tao = DateTime.Now;
                 _DBContext.NV.Add(nV);
                 await _DBContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -116,7 +107,7 @@ namespace Unicorn.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(String id, [Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_Chucvu")] NV nV)
+        public async Task<IActionResult> Edit(String id, [Bind("ID_NV,ImageFile,Name,Nam_sinh,Gioi_tinh,Que_quan,SDT,CMT,Ngay_vao,Ngay_tao,ID_To,ID_CV")] NV nV)
         {
             if (id != nV.ID_NV)
             {
@@ -140,10 +131,6 @@ namespace Unicorn.Controllers
                     //var image = await _DBContext.NV.FindAsync(nV.ID_NV);
                     nV.Image = "/Image/" + "Nhanvien." + nV.ID_NV + ".png";
                 }
-                var To = await _DBContext.To.FindAsync(nV.ID_To);
-                var CV = await _DBContext.CV.FindAsync(nV.ID_Chucvu);
-                nV.Name_CV = CV.Name;
-                nV.Name_To = To.Name;
                 try
                 {
 

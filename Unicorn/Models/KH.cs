@@ -10,8 +10,8 @@ namespace Unicorn.Models
         public String ID_KH { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Tên khách hàng không được để trống")]
         public string Name { get; set; }
-        public string Dia_chi { get; set; }
-        public string Ghi_chu { get; set; }
-        public bool Is_NCC { get; set; }
+        public string? Dia_chi { get; set; } = null;
+        public string? Ghi_chu { get; set; } = null;
+        public bool? Is_NCC { get; set; } = false;
     }
 }

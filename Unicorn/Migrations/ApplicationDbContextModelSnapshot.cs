@@ -224,6 +224,55 @@ namespace Unicorn.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Unicorn.Models.BTP", b =>
+                {
+                    b.Property<string>("ID_BTP")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DG_ban")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DG_mua")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ID_DVT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ID_Loai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mo_ta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Nguon_goc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SL_ton")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_BTP");
+
+                    b.HasIndex("ID_DVT");
+
+                    b.HasIndex("ID_Loai");
+
+                    b.ToTable("tbl_BTP");
+                });
+
             modelBuilder.Entity("Unicorn.Models.CV", b =>
                 {
                     b.Property<string>("ID_CV")
@@ -252,15 +301,25 @@ namespace Unicorn.Migrations
                     b.Property<string>("Ghi_chu")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ID_BTP")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("ID_NVL")
                         .IsRequired()
                         .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ID_TP")
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("SL")
                         .HasColumnType("int");
 
                     b.HasKey("ID_DMNVL");
+
+                    b.HasIndex("ID_BTP");
+
+                    b.HasIndex("ID_TP");
 
                     b.ToTable("tbl_DMNVL");
                 });
@@ -271,21 +330,32 @@ namespace Unicorn.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("BTPID_BTP")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("Dien_giai")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ID_DVT")
+                    b.Property<string>("ID_NVL")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Phep_tinh")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TPID_TP")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<int>("Ty_le")
                         .HasColumnType("int");
 
                     b.HasKey("ID_DVCD");
+
+                    b.HasIndex("BTPID_BTP");
+
+                    b.HasIndex("ID_NVL");
+
+                    b.HasIndex("TPID_TP");
 
                     b.ToTable("tbl_DVCD");
                 });
@@ -321,7 +391,7 @@ namespace Unicorn.Migrations
                     b.Property<string>("Ghi_chu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Is_NCC")
+                    b.Property<bool?>("Is_NCC")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -358,6 +428,9 @@ namespace Unicorn.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("BTPID_BTP")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<double>("Gia")
                         .HasColumnType("float");
 
@@ -369,7 +442,6 @@ namespace Unicorn.Migrations
 
                     b.Property<string>("ID_NVL")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Name")
@@ -380,10 +452,19 @@ namespace Unicorn.Migrations
                     b.Property<int>("SL_Ton")
                         .HasColumnType("int");
 
+                    b.Property<string>("TPID_TP")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<int>("Thoi_gian")
                         .HasColumnType("int");
 
                     b.HasKey("ID_MQC");
+
+                    b.HasIndex("BTPID_BTP");
+
+                    b.HasIndex("ID_NVL");
+
+                    b.HasIndex("TPID_TP");
 
                     b.ToTable("tbl_MQC");
                 });
@@ -400,7 +481,7 @@ namespace Unicorn.Migrations
                     b.Property<string>("Ghi_chu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Is_KH")
+                    b.Property<bool?>("Is_KH")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -421,19 +502,20 @@ namespace Unicorn.Migrations
                     b.Property<int?>("CMT")
                         .HasColumnType("int");
 
+                    b.Property<string>("CVsID_CV")
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("Gioi_tinh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ID_Chucvu")
+                    b.Property<string>("ID_CV")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ID_To")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -445,12 +527,6 @@ namespace Unicorn.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name_CV")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name_To")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Ngay_tao")
                         .HasColumnType("datetime2");
@@ -464,7 +540,14 @@ namespace Unicorn.Migrations
                     b.Property<int?>("SDT")
                         .HasColumnType("int");
 
+                    b.Property<string>("TosID_To")
+                        .HasColumnType("nvarchar(10)");
+
                     b.HasKey("ID_NV");
+
+                    b.HasIndex("CVsID_CV");
+
+                    b.HasIndex("TosID_To");
 
                     b.ToTable("tbl.NV");
                 });
@@ -483,12 +566,10 @@ namespace Unicorn.Migrations
 
                     b.Property<string>("ID_DVT")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_Loai")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Image")
@@ -505,7 +586,7 @@ namespace Unicorn.Migrations
                     b.Property<string>("Nguon_goc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SL_ton")
+                    b.Property<int?>("SL_ton")
                         .HasColumnType("int");
 
                     b.Property<string>("Size")
@@ -513,56 +594,57 @@ namespace Unicorn.Migrations
 
                     b.HasKey("ID_NVL");
 
+                    b.HasIndex("ID_DVT");
+
+                    b.HasIndex("ID_Loai");
+
                     b.ToTable("tbl_NVL");
                 });
 
-            modelBuilder.Entity("Unicorn.Models.Quyen", b =>
+            modelBuilder.Entity("Unicorn.Models.TP", b =>
                 {
-                    b.Property<string>("ID_Quyen")
+                    b.Property<string>("ID_TP")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<bool>("IS_Ban")
-                        .HasColumnType("bit");
+                    b.Property<string>("DG_ban")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IS_CCDC")
-                        .HasColumnType("bit");
+                    b.Property<string>("ID_DVT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<bool>("IS_Kho")
-                        .HasColumnType("bit");
+                    b.Property<string>("ID_Loai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<bool>("IS_Mua")
-                        .HasColumnType("bit");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IS_QLUser")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_Quy")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_Quyen")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_THP")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_TL")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_TP")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IS_TSCD")
-                        .HasColumnType("bit");
+                    b.Property<string>("Mo_ta")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("ID_Quyen");
+                    b.Property<string>("Nguon_goc")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("tbl_Quyen");
+                    b.Property<int?>("SL_ton")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_TP");
+
+                    b.HasIndex("ID_DVT");
+
+                    b.HasIndex("ID_Loai");
+
+                    b.ToTable("tbl_TP");
                 });
 
             modelBuilder.Entity("Unicorn.Models.To", b =>
@@ -591,12 +673,7 @@ namespace Unicorn.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ID_NV")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("ID_Quyen")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("MK")
@@ -610,6 +687,8 @@ namespace Unicorn.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ID_User");
+
+                    b.HasIndex("ID_NV");
 
                     b.ToTable("tbl_User");
                 });
@@ -663,6 +742,167 @@ namespace Unicorn.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Unicorn.Models.BTP", b =>
+                {
+                    b.HasOne("Unicorn.Models.DVT", "DVT")
+                        .WithMany()
+                        .HasForeignKey("ID_DVT")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Unicorn.Models.Loai", "Loai")
+                        .WithMany()
+                        .HasForeignKey("ID_Loai")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DVT");
+
+                    b.Navigation("Loai");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.DMNVL", b =>
+                {
+                    b.HasOne("Unicorn.Models.BTP", "BTP")
+                        .WithMany("DMNVL")
+                        .HasForeignKey("ID_BTP");
+
+                    b.HasOne("Unicorn.Models.TP", "TP")
+                        .WithMany("DMNVL")
+                        .HasForeignKey("ID_TP");
+
+                    b.Navigation("BTP");
+
+                    b.Navigation("TP");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.DVCD", b =>
+                {
+                    b.HasOne("Unicorn.Models.BTP", null)
+                        .WithMany("DVCD")
+                        .HasForeignKey("BTPID_BTP");
+
+                    b.HasOne("Unicorn.Models.NVL", "NVL")
+                        .WithMany("DVCD")
+                        .HasForeignKey("ID_NVL")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Unicorn.Models.TP", null)
+                        .WithMany("DVCD")
+                        .HasForeignKey("TPID_TP");
+
+                    b.Navigation("NVL");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.MQC", b =>
+                {
+                    b.HasOne("Unicorn.Models.BTP", null)
+                        .WithMany("MQC")
+                        .HasForeignKey("BTPID_BTP");
+
+                    b.HasOne("Unicorn.Models.NVL", "NVL")
+                        .WithMany("MQC")
+                        .HasForeignKey("ID_NVL")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Unicorn.Models.TP", null)
+                        .WithMany("MQC")
+                        .HasForeignKey("TPID_TP");
+
+                    b.Navigation("NVL");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.NV", b =>
+                {
+                    b.HasOne("Unicorn.Models.CV", "CVs")
+                        .WithMany()
+                        .HasForeignKey("CVsID_CV");
+
+                    b.HasOne("Unicorn.Models.To", "Tos")
+                        .WithMany()
+                        .HasForeignKey("TosID_To");
+
+                    b.Navigation("CVs");
+
+                    b.Navigation("Tos");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.NVL", b =>
+                {
+                    b.HasOne("Unicorn.Models.DVT", "DVT")
+                        .WithMany()
+                        .HasForeignKey("ID_DVT")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Unicorn.Models.Loai", "Loai")
+                        .WithMany()
+                        .HasForeignKey("ID_Loai")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DVT");
+
+                    b.Navigation("Loai");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.TP", b =>
+                {
+                    b.HasOne("Unicorn.Models.DVT", "DVT")
+                        .WithMany()
+                        .HasForeignKey("ID_DVT")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Unicorn.Models.Loai", "Loai")
+                        .WithMany()
+                        .HasForeignKey("ID_Loai")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DVT");
+
+                    b.Navigation("Loai");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.User", b =>
+                {
+                    b.HasOne("Unicorn.Models.NV", "NV")
+                        .WithMany()
+                        .HasForeignKey("ID_NV")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NV");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.BTP", b =>
+                {
+                    b.Navigation("DMNVL");
+
+                    b.Navigation("DVCD");
+
+                    b.Navigation("MQC");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.NVL", b =>
+                {
+                    b.Navigation("DVCD");
+
+                    b.Navigation("MQC");
+                });
+
+            modelBuilder.Entity("Unicorn.Models.TP", b =>
+                {
+                    b.Navigation("DMNVL");
+
+                    b.Navigation("DVCD");
+
+                    b.Navigation("MQC");
                 });
 #pragma warning restore 612, 618
         }

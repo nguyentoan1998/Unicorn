@@ -10,7 +10,7 @@ namespace Unicorn.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Mã nhân viên không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
         public String ID_NV { get; set; }
-        public string Image { get;set; }
+        public string? Image { get; set; } = "/image/No_Image.png";
         [NotMapped]
         public IFormFile ImageFile { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Tên nhân viên không được để trống")]
@@ -20,19 +20,19 @@ namespace Unicorn.Models
         public DateTime Nam_sinh { get; set; }
         [Required(ErrorMessage = "Vui lòng chọn giới tính")]
         public string Gioi_tinh { get; set; }
-        public string Que_quan { set; get; }
-        public Nullable<int> SDT { set; get; }
-        public Nullable<int> CMT { set; get; }
+        public string? Que_quan { set; get; } = null;
+        public int? SDT { set; get; } = null;
+        public int? CMT { set; get; } = null;
         [Required(ErrorMessage = "Vui lòng nhập ngày vào")]
         public DateTime Ngay_vao { get; set; }
-        public DateTime Ngay_tao { get; set; }
-        [Required(ErrorMessage = "Tổ không được để trống")]
-        [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public String ID_To { get; set; }
-        public string Name_To{ get; set; }
-        [Required(ErrorMessage = "Chức vụ không được để trống")]
-        [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public String ID_Chucvu { get; set; }
-        public string Name_CV { get; set; }
+        public DateTime Ngay_tao { get; set; } = DateTime.Now;
+        [Required]
+        [ForeignKey("To")]
+        public string ID_To { get; set; }
+        public virtual To Tos { get; set; }
+        [Required]
+        [ForeignKey("CV")]
+        public string ID_CV { get; set; }
+        public virtual CV CVs { get; set; }
     }
 }

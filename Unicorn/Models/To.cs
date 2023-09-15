@@ -11,6 +11,6 @@ namespace Unicorn.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Tên tổ không được để trống")]
         [StringLength(50, ErrorMessage = "Không được vượt quá 50 ký tự")]
         public string Name { get; set; }
-        public string Ghi_chu { get; set; }
+        public string? Ghi_chu { get; set; } = null;
     }
 }

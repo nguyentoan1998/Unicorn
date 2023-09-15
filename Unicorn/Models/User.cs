@@ -14,11 +14,10 @@ namespace Unicorn.Models
         [Required(AllowEmptyStrings = false,ErrorMessage = "Mật khẩu không được để trống")]
         [StringLength(50)]
         public string MK { get; set; }
-        [Required(AllowEmptyStrings = false,ErrorMessage = "Quyền hạn không được để trống")]
-        [StringLength(10)]
-        public String ID_Quyen { get; set; }
-        [StringLength(10)]
-        public String ID_NV { get; set; }
+        [Required]
+        [ForeignKey("NV")]
+        public string ID_NV { get; set; }
+        public virtual NV NV { get; private set; }
 
     }
 }

@@ -13,5 +13,11 @@
         [Required(AllowEmptyStrings = false, ErrorMessage = "Số lượng không được để trống")]
         public int SL { get; set; }
         public String Ghi_chu { get; set; }
+        [ForeignKey("TP")]
+        public string ID_TP { get; set; }
+        public virtual TP TP { get; private set; }
+        [ForeignKey("BTP")]
+        public string ID_BTP { get; set; }
+        public virtual BTP BTP { get; private set; }
     }
 }

@@ -1,13 +1,13 @@
 ﻿namespace Unicorn.Models
 {
-    [Table("tbl_NVL")]
-    public class NVL
+    [Table("tbl_BTP")]
+    public class BTP
     {
         [Key]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Mã nguyên vật liệu không được để trống")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Mã Bán thành phẩm không được để trống")]
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 ký tự")]
-        public String ID_NVL { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Tên nguyên vật liệu không được để trống")]
+        public String ID_BTP { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Tên Bán thành phẩm không được để trống")]
         [StringLength(50, ErrorMessage = "Không được vượt quá 50 ký tự")]
         public string Name { get; set; }
         public string? Mo_ta { get; set; } = null;
@@ -29,6 +29,7 @@
         public virtual Loai Loai { get; private set; }
         public virtual List<MQC> MQC { get; set; } = new List<MQC>();
         public virtual List<DVCD> DVCD{ get; set; } = new List<DVCD>();
+        public virtual List<DMNVL> DMNVL { get; set; } = new List<DMNVL>();
 
 
 

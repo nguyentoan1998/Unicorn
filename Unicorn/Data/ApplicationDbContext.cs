@@ -20,6 +20,7 @@ namespace Unicorn.Data
         public DbSet<DVT> DVT { get; set; }
         public DbSet<MQC> MQC { get; set; }
         public DbSet<Loai> Loai { get; set; }
-        public DbSet<Quyen> Quyen { get; set; }
+        public DbSet<TP> TP { get; set; }
+        public DbSet<BTP> BTP { get; set; }
     }
 }
